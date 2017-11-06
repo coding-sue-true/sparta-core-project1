@@ -3,7 +3,7 @@ $(function(event) {
 
   //---------------------- GLOBAL VARIABLES ---------------------------//
   // var directionX = 0;
-  var $speed = 100;
+  // var $speed = 100;
   var $object = 0;
   var $init = 0; // inital size and conditions of the snake
   var $score = 0; // initial score
@@ -14,34 +14,80 @@ $(function(event) {
   var $ctx = $("#canvas")[0].getContext('2d'); // this access the drawing content
 
   //------ This gives me the shape and color of the snake
-  if (canvas.getContext) {
-    $ctx
-  } else {
-    alert ("Your current browser does not support canvas (the element where we built our game)");
-  }
+  // if (canvas.getContext) {
+  //   $ctx
+  // } else {
+  //   alert ("Your current browser does not support canvas (the element where we built our game)");
+  // }
 
   //------- Initial function: position, color-----
-  function snake() {
-    var grd = $ctx.createLinearGradient(50, 50, 100, 50);
-    grd.addColorStop("0.25", "#094D92");
-    grd.addColorStop("0.5", "#95E06C");
-    grd.addColorStop("0.75", "#8AE9C1");
-    grd.addColorStop("1", "#C3F73A");
-    //This gives me the snake's initial position and path
-    // $ctx.beginPath();
+    function horizontal(){
+      var grd = $ctx.createLinearGradient(50, 50, 100, 50);
+      grd.addColorStop("0.25", "#094D92");
+      grd.addColorStop("0.5", "#95E06C");
+      grd.addColorStop("0.75", "#8AE9C1");
+      grd.addColorStop("1", "#C3F73A");
+      // $ctx.beginPath();
+      // $ctx.moveTo(50,50);
+      // $ctx.lineTo(100, 50);
 
-    // $ctx.fillStyle = grd;
-    // $ctx.fillRect(200,0,100,100);
-    // $ctx.moveTo(50,50);
-    // $ctx.lineTo(100, 50);
-    // $ctx.strokeStyle = grd;
-    // $ctx.lineWidth = 5;
-    // $ctx.stroke()
-  }
-  snake();
+      var x = 0
+      window.requestAnimationFrame(function loop(){
+        x += 1
 
-  // $ctx.fillStyle = grd;
-  // $ctx.fillRect(100, 100, 150, 150);
+        $ctx.clearRect(0,0,canvas.width, canvas.height)
+        $ctx.fillStyle = grd
+        $ctx.fillRect(x, 10, 150, 30)
+        window.requestAnimationFrame(loop)
+      })
+    }
+    horizontal();
+
+    document.addEventListener('mousedown', function(event) {
+      if (event.button === 0) {
+        x += 10
+      }
+      if (event.button === 2) {
+        x += 10
+      }
+    })
+
+
+
+
+
+
+
+
+
+//--------------------Change Direction--------------------
+    // function getNewDirection (keyCode) {
+    //   var codes = {
+    //     37 : 'left',
+    //     38 : 'up',
+    //     39 : 'right',
+    //     40 : 'down'
+    //   };
+    //
+    //   if( typeof codes[ keyCode ] != 'undefined' ) {
+    //     var newDirection = codes[ keyCode ], changeDirection = true;
+    //     switch( direction ) {
+    //       case 'up' :
+    //       changeDirection = newDirection != 'down';
+    //       break;
+    //       case 'down' :
+    //       changeDirection = newDirection != 'up';
+    //       break;
+    //       case 'right' :
+    //       changeDirection = newDirection != 'left';
+    //       break;
+    //       case 'left' :
+    //       changeDirection = newDirection != 'right';
+    //       break;
+    //     }
+    //     direction = changeDirection ? newDirection : direction;
+    //   }
+    // }
   //----------------Horizontal movement -------------------
   // function horizontal() {
   //   var directionX = 0;
@@ -58,20 +104,6 @@ $(function(event) {
   // }
   // horizontal();
 
-  function horizontal(snakeFunction){
-    var x = 0
-    window.requestAnimationFrame(function loop(){
-      x += 1
-
-      $ctx.clearRect(0,0,canvas.width, canvas.height)
-      $ctx.fillStyle = grd
-      $ctx.fillRect(x, 10, 150, 30)
-      window.requestAnimationFrame(loop)
-    })
-  }
-  horizontal(snake);
-
-
   //----------------------INITAL FUNCTION --------------------------
 //
 //   function init() {
@@ -83,33 +115,6 @@ $(function(event) {
 //
 //   //-------------------------- CHANGING DIRECTIONS WITH KEYBOARD ----------//
 //
-//   function getNewDirection (keyCode) {
-//   var codes = {
-//     37 : 'left',
-//     38 : 'up',
-//     39 : 'right',
-//     40 : 'down'
-//   };
-//
-//   if( typeof codes[ keyCode ] != 'undefined' ) {
-//     var newDirection = codes[ keyCode ], changeDirection = true;
-//     switch( direction ) {
-//       case 'up' :
-//         changeDirection = newDirection != 'down';
-//         break;
-//       case 'down' :
-//         changeDirection = newDirection != 'up';
-//         break;
-//       case 'right' :
-//         changeDirection = newDirection != 'left';
-//         break;
-//       case 'left' :
-//         changeDirection = newDirection != 'right';
-//         break;
-//     }
-//     direction = changeDirection ? newDirection : direction;
-//   }
-// }
 
 //----------------------------------
 
