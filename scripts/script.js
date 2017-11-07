@@ -2,130 +2,136 @@ $(function(event) {
   console.log("Let the game beign! DOM is ready");
 
   //---------------------- GLOBAL VARIABLES ---------------------------//
-  // var directionX = 0;
-  // var $speed = 100;
-  var $object = 0;
-  var $init = 0; // inital size and conditions of the snake
-  var $score = 0; // initial score
-  var $insert = 0; // insert an item to the queue (to the snake)
   canvas.width = window.screen.width;
   canvas.height = window.screen.height;
   var $canvas = $('#canvas'); // get element by ID
   var $ctx = $("#canvas")[0].getContext('2d'); // this access the drawing content
+  // var $direction = 0;
+  // var $speed = 10;
+//   var s;
+//   s = new snake();
+//   //-----------Set Up Function ----------------
+//   // function setup(){
+//   //   createCanvas(600, 600);
+//   //   s = new snake();
+//   //
+//   // }
+//
+//
+//   //------------Draw Function
+// function draw() {
+//   background(51);
+//   s.update();
+//   s.show();
+// }
 
-  //------ This gives me the shape and color of the snake
-  // if (canvas.getContext) {
-  //   $ctx
-  // } else {
-  //   alert ("Your current browser does not support canvas (the element where we built our game)");
+
+  //------- SNAKE GRADIENT COLOR-----
+  // var grd = $ctx.createLinearGradient(50, 50, 100, 50);
+  // grd.addColorStop("0.25", "#094D92");
+  // grd.addColorStop("0.5", "#95E06C");
+  // grd.addColorStop("0.75", "#8AE9C1");
+  // grd.addColorStop("1", "#C3F73A");
+
+  //-------- SNAKE BODY -------------
+  // function snake(){
+  //   this.x = 0;
+  //   this.y = 0;
+  //   this.xspeed = 1;
+  //   this.yspeed = 0;
+  //
+  //   this.update = function(){
+  //     this.x = this.x + this.xspeed;
+  //     this.y = this.y + this.yspeed;
+  //   }
+  //
+  //   this.show = function() {
+  //     fill(255);
+  //     rect(this.x, this.y, 10, 10);
+  //   }
   // }
 
-  //------- Initial function: position, color-----
-    function horizontal(){
-      var grd = $ctx.createLinearGradient(50, 50, 100, 50);
-      grd.addColorStop("0.25", "#094D92");
-      grd.addColorStop("0.5", "#95E06C");
-      grd.addColorStop("0.75", "#8AE9C1");
-      grd.addColorStop("1", "#C3F73A");
-      // $ctx.beginPath();
-      // $ctx.moveTo(50,50);
-      // $ctx.lineTo(100, 50);
 
-      var x = 0
-      window.requestAnimationFrame(function loop(){
-        x += 1
+  // ------------ X movement - right ---------
 
-        $ctx.clearRect(0,0,canvas.width, canvas.height)
-        $ctx.fillStyle = grd
-        $ctx.fillRect(x, 10, 150, 30)
-        window.requestAnimationFrame(loop)
-      })
-    }
-    horizontal();
+  var x = 0;
+  var y = 0;
+  var snakeLength = 300;
+  var snakeWidth = 30;
 
-    document.addEventListener('mousedown', function(event) {
-      if (event.button === 0) {
-        x += 10
-      }
-      if (event.button === 2) {
-        x += 10
-      }
+  function movementXRight() {
+    window.requestAnimationFrame(function loop(){
+      x += 1;
+      $ctx.clearRect(0,0,canvas.width, canvas.height)
+      $ctx.fillStyle = 'white';
+      $ctx.fillRect(x - snakeLength, -y, snakeLength, snakeWidth)
+      window.requestAnimationFrame(loop) // search how to stop this
     })
+  }
+  movementXRight();
+  //------------------- Y movement - down --------------
+  function movementYDown() {
+    // var y = 0;
+    window.requestAnimationFrame(function loop(){
+      y += 1;
+      $ctx.clearRect(0,0,canvas.width, canvas.height)
+      $ctx.fillStyle = 'white';
+      $ctx.fillRect(x, y, snakeWidth, snakeLength)
+      window.requestAnimationFrame(loop)
+    })
+  }
+  // movementYDown();
+  //------------------- X movement - left --------------
+  function movementXLeft() {
+    // var x = 0;
+    window.requestAnimationFrame(function loop(){
+      x += 1;
+      $ctx.clearRect(0,0,canvas.width, canvas.height)
+      $ctx.fillStyle = 'white';
+      $ctx.fillRect(x, -y, snakeLength, snakeWidth)
+      window.requestAnimationFrame(loop)
+    })
+  }
+  // // movementXLeft();
+  // //------------------- Y movement - up --------------
+  function movementYUp() {
+    // var y = 0;
+    window.requestAnimationFrame(function loop(){
+      y += 1;
+      $ctx.clearRect(0,0,canvas.width, canvas.height)
+      $ctx.fillStyle = 'white';
+      $ctx.fillRect(-x, y, snakeWidth, snakeLength)
+      window.requestAnimationFrame(loop)
+    })
+  }
+  //movementYUp();
+  //----------- CHANGING DIRECTIONS ---------------
+  $(document).keydown(function(e) {
+    switch(e.which) {
+      case 37: // left
+      console.log('37 key');
+      movementXLeft();
+      break;
 
+      case 38: // up
+      console.log('38 key');
+      movementYUp();
+      break;
 
+      case 39: // right
+      console.log('39 key');
+      movementXRight();
+      break;
 
+      case 40: // down
+      console.log('40 key');
+      movementYDown();
+      break;
 
-
-
-
-
-
-//--------------------Change Direction--------------------
-    // function getNewDirection (keyCode) {
-    //   var codes = {
-    //     37 : 'left',
-    //     38 : 'up',
-    //     39 : 'right',
-    //     40 : 'down'
-    //   };
-    //
-    //   if( typeof codes[ keyCode ] != 'undefined' ) {
-    //     var newDirection = codes[ keyCode ], changeDirection = true;
-    //     switch( direction ) {
-    //       case 'up' :
-    //       changeDirection = newDirection != 'down';
-    //       break;
-    //       case 'down' :
-    //       changeDirection = newDirection != 'up';
-    //       break;
-    //       case 'right' :
-    //       changeDirection = newDirection != 'left';
-    //       break;
-    //       case 'left' :
-    //       changeDirection = newDirection != 'right';
-    //       break;
-    //     }
-    //     direction = changeDirection ? newDirection : direction;
-    //   }
-    // }
-  //----------------Horizontal movement -------------------
-  // function horizontal() {
-  //   var directionX = 0;
-  //   window.requestAnimationFrame(function loop() {
-  //     //during this loop, the direction of the snake will increase
-  //     directionX += 1
-  //     //this deletes the previous path as the snake moves
-  //     $ctx.clearRect(0, 0, canvas.width, canvas.height)
-  //     $ctx.fillStyle = grd
-  //     $ctx.fillRect(x,0,150,30);
-  //     // $ctx.fillCap="round";
-  //     window.requestAnimationFrame(loop)
-  //   })
-  // }
-  // horizontal();
-
-  //----------------------INITAL FUNCTION --------------------------
-//
-//   function init() {
-//     $speed = 0;
-//     $direction = 'right';
-//   }
-//
-//
-//
-//   //-------------------------- CHANGING DIRECTIONS WITH KEYBOARD ----------//
-//
-
-//----------------------------------
-
-
-
-
-
-
-
-
-
+      default: return; // exit this handler for other keys
+    }
+    e.preventDefault(); // prevent the default action (scroll / move caret)
+  })
 
 
 

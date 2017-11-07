@@ -10,7 +10,7 @@ body {
 
 /*--------------------- CANVAS ------------------------ */
 
-#canvas {
+/*#canvas {
   background-color: black;
   margin-top: 50px;
   padding-left: 0;
@@ -19,7 +19,7 @@ body {
   margin-right: auto;
   display: block;
   width: 500px;
-}
+}*/
 
 /*---------------------INITIAL GAME PAGE ------------------------ */
 
@@ -34,4 +34,8 @@ body {
 .buttonStart {
   text-align: center;
   margin-top: 30px;
+}
+
+.elements {
+  visibility: hidden;
 }
