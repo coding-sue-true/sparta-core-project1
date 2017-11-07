@@ -6,33 +6,33 @@
 // }
 
 //--------------------Change Direction--------------------
-    // function getNewDirection (keyCode) {
-    //   var codes = {
-    //     37 : 'left',
-    //     38 : 'up',
-    //     39 : 'right',
-    //     40 : 'down'
-    //   };
-    //
-    //   if( typeof codes[ keyCode ] != 'undefined' ) {
-    //     var newDirection = codes[ keyCode ], changeDirection = true;
-    //     switch( direction ) {
-    //       case 'up' :
-    //       changeDirection = newDirection != 'down';
-    //       break;
-    //       case 'down' :
-    //       changeDirection = newDirection != 'up';
-    //       break;
-    //       case 'right' :
-    //       changeDirection = newDirection != 'left';
-    //       break;
-    //       case 'left' :
-    //       changeDirection = newDirection != 'right';
-    //       break;
-    //     }
-    //     direction = changeDirection ? newDirection : direction;
-    //   }
-    // }
+    function getNewDirection (keyCode) {
+      var codes = {
+        37 : 'left',
+        38 : 'up',
+        39 : 'right',
+        40 : 'down'
+      };
+
+      if( typeof codes[ keyCode ] != 'undefined' ) {
+        var newDirection = codes[ keyCode ], changeDirection = true;
+        switch( direction ) {
+          case 'up' :
+          changeDirection = newDirection != 'down';
+          break;
+          case 'down' :
+          changeDirection = newDirection != 'up';
+          break;
+          case 'right' :
+          changeDirection = newDirection != 'left';
+          break;
+          case 'left' :
+          changeDirection = newDirection != 'right';
+          break;
+        }
+        direction = changeDirection ? newDirection : direction;
+      }
+    }
   //----------------Horizontal movement -------------------
   // function horizontal() {
   //   var directionX = 0;
