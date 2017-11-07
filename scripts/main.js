@@ -6,7 +6,7 @@ $(function(event) {
   var $ctx = $("#canvas")[0].getContext('2d'); // this access the drawing content
   var $w = $('#canvas').width();
   var $h = $('#canvas').height();
-  var $cw = 10;
+  var $cw = 15;
   var $d = 'right';
   //------ canvas shape and color
   // $ctx.fillStyle = 'white';
@@ -80,9 +80,31 @@ $(function(event) {
   })
 
     //snake movement in milliseconds
-    game_loop = setInterval(paint, 60);
+    game_loop = setInterval(paint, 120);
   // paint();
 
+  $(document).keydown(function(e) {
+    switch(e.which) {
+      case 37: // left
+      console.log('37 key');
+      break;
+
+      case 38: // up
+      console.log('38 key');
+      break;
+
+      case 39: // right
+      console.log('39 key');
+      break;
+
+      case 40: // down
+      console.log('40 key');
+      break;
+
+      default: return; // exit this handler for other keys
+    }
+    e.preventDefault(); // prevent the default action (scroll / move caret)
+  })
 
 
 
