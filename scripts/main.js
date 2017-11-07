@@ -5,7 +5,7 @@ $(function(event) {
 	var $ctx = canvas.getContext("2d"); //this is how we acces the drawing content
 	var $width = $("#canvas").width();
 	var $height = $("#canvas").height();
-	var $cellWidth = 15;
+	var $cellWidth = 20;
 	var $direction;
 	var $food;
 	var $score;
@@ -23,19 +23,19 @@ $(function(event) {
 		if(typeof game_loop != "undefined") {
 			clearInterval(game_loop);
 		}
-		game_loop = setInterval(paint, 120);
+		game_loop = setInterval(paint, 200);
 	}
 	init();
 
 	function create_snake() {
-		var length = 5;
+		// var length = 5;
 		snake_array = [];
-		for(var i = length-1; i>=0; i--) {
+		// for(var i = length; i>=0; i--) {
+			snake_array.push({x: Math.round(Math.random()*($width-$cellWidth)/$cellWidth), y: Math.round(Math.random()*($height-$cellWidth)/$cellWidth)});
 			//This will create a horizontal snake starting from the top left
-			snake_array.push({x: Math.round(Math.random()*($width-$cellWidth)/$cellWidth), y:0});
 			// snake_array.push({x: i, y:0});
 
-		}
+		// }
 	}
 
 	function create_food() {
@@ -57,25 +57,25 @@ $(function(event) {
 		//The movement code for the snake to come here.
 		//The logic is simple
 		//Pop out the tail cell and place it infront of the head cell
-		var nx = snake_array[0].x;
-		var ny = snake_array[0].y;
+		var xAxis = snake_array[0].x;
+		var yAxis = snake_array[0].y;
 		//These were the position of the head cell.
 		//We will increment it to get the new head position
 		//Lets add proper direction based movement now
 		if($direction == "right") {
-			nx++;
+			xAxis++;
 		}	else if($direction == "left") {
-			nx--;
+			xAxis--;
 		} else if($direction == "up") {
-			ny--;
+			yAxis--;
 		} else if($direction == "down") {
-			ny++;
+			yAxis++;
 		}
 		//Lets add the game over clauses now
 		//This will restart the game if the snake hits the wall
 		//Lets add the code for body collision
 		//Now if the head of the snake bumps into its body, the game will restart
-		if(nx == -1 || nx == $width/$cellWidth || ny == -1 || ny == $height/$cellWidth || check_collision(nx, ny, snake_array))
+		if(xAxis == -1 || xAxis == $width/$cellWidth || yAxis == -1 || yAxis == $height/$cellWidth || check_collision(xAxis, yAxis, snake_array))
 		{
 			//restart game
 			init();
@@ -86,14 +86,14 @@ $(function(event) {
 		//The logic is simple
 		//If the new head position matches with that of the food,
 		//Create a new head instead of moving the tail
-		if(nx == $food.x && ny == $food.y) {
-			var tail = {x: nx, y: ny};
+		if(xAxis == $food.x && yAxis == $food.y) {
+			var tail = {x: xAxis, y: yAxis};
 			$score++;
 			//Create new food
 			create_food();
 		} else {
 			var tail = snake_array.pop(); //pops out the last cell
-			tail.x = nx; tail.y = ny;
+			tail.x = xAxis; tail.y = yAxis;
 		}
 		//The snake can now eat the food.
 
@@ -108,8 +108,8 @@ $(function(event) {
 		//Lets paint the food
 		paint_cell($food.x, $food.y);
 		//Lets paint the score
-		// var score_text = "Score: " + $score;
-		// $ctx.fillText(score_text, 5, h-5);
+		var score_text = "Score: " + $score;
+		$ctx.fillText(score_text, 5, $height-5);
 	}
 
 	//Lets first create a generic function to paint cells
