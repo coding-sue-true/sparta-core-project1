@@ -2,26 +2,38 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <!--  BOOTSTRAP  -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
+    <!--  JQUERY  -->
     <script
-    src="https://code.jquery.com/jquery-3.2.1.min.js"
-    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-    crossorigin="anonymous">
+    src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous">
     </script>
+    <!--  FONT AWESOME  -->
     <script src="https://use.fontawesome.com/fc82f8f294.js"></script>
     <script type="text/javascript" src="scripts/main.js"></script>
-    <!-- Latest compiled and minified CSS -->
     <title>Snake Game</title>
   </head>
   <body>
+    <nav class="navbar fixed-top navbar-light bg-faded justify-content-center">
+      <img src="images/logo.png" alt="snakeLogo">
+      <!-- <a class="navbar-brand" href="#">Fixed top</a> -->
+    </nav>
     <div class="container">
-      <canvas id="canvas" width="500" height="350">
-        <!-- <canvas id="instructions" width="300" height="300"></canvas> -->
-        <!-- style="background: url('./images/background.jpg')" -->
-      </canvas>
+      <div id="instructions">
+        <img src="images/snake.png" alt="snake">
+        <ul>
+          <li><h1>Rules</h1></li>
+          <li>Use your keyboard keys to move the snake: right, up, left, down.</li>
+          <li>If you go against the walls or the snake itself, you die!</li>
+          <li>Score as much as you can by eating elements</li>
+        </ul>
+      </div>
       <div class="buttonStart">
-        <button type="button" class="btn btn-warning">Start Game!</button>
+        <button type="button" class="btn btn-warning"><a href="#canvas">Start Game!</a></button>
+      </div>
+      <div class="gamePage">
+        <canvas id="canvas" width="500" height="350"></canvas>
       </div>
       <div class="elements">
         <!-- elements snake will eat
@@ -51,3 +63,7 @@
     </div>
   </body>
 </html>
+
+
+<!-- <canvas id="instructions" width="300" height="300"></canvas> -->
+<!-- style="background: url('./images/background.jpg')" -->

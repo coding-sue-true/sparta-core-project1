@@ -1,5 +1,7 @@
 $(function(event) {
   console.log("Let the game beign! DOM is ready");
+
+	$('.btn').on("click", init);
 	//------ Global Variables -------------------
 	var $canvas = $("#canvas")[0];
 	var $ctx = canvas.getContext("2d"); //this is how we acces the drawing content
@@ -15,11 +17,11 @@ $(function(event) {
 
 	//-----------------this is the main function that makes the game run
 	function init() {
+		$('#canvas').css('visibility', 'visible');
 		$direction = "right";
 		create_snake();
 		create_food();
 		$score = 0;
-		// $speed = 200;
 
 		//Lets move the snake now using a timer which will trigger the paint function
 		if(typeof game_loop != "undefined") {
@@ -27,7 +29,6 @@ $(function(event) {
 		}
 		game_loop = setInterval(paint, 180);
 	}
-	init();
 
 
 
@@ -50,56 +51,60 @@ $(function(event) {
 
 	//------------------------Canvas and Snake Colors ----------------------
 	function paint() {
-		//To avoid the snake trail we need to paint the BG on every frame
-		//Lets paint the canvas now
+		//CANVAS
 		$ctx.fillStyle = "white";
 		$ctx.fillRect(0, 0, $width, $height);
 		$ctx.strokeStyle = "black";
 		$ctx.strokeRect(0, 0, $width, $height);
 
-		//The movement code for the snake to come here.
-		//The logic is simple
-		//Pop out the tail cell and place it infront of the head cell
-		var xAxis = snake_array[0].x;
-		var yAxis = snake_array[0].y;
-		//These were the position of the head cell.
-		//We will increment it to get the new head position
+		//This adds a cell to the snake_array
+		var horizontalSnakeBody = snake_array[0].x;
+		var verticalSnakeBody = snake_array[0].y;
+
 		//Lets add proper direction based movement now
 		if($direction == "right") {
-			xAxis++;
+			horizontalSnakeBody++;
 		}	else if($direction == "left") {
-			xAxis--;
+			horizontalSnakeBody--;
 		} else if($direction == "up") {
-			yAxis--;
+			verticalSnakeBody--;
 		} else if($direction == "down") {
-			yAxis++;
+			verticalSnakeBody++;
 		}
 		//Lets add the game over clauses now
 		//This will restart the game if the snake hits the wall
 		//Lets add the code for body collision
 		//Now if the head of the snake bumps into its body, the game will restart
-		if(xAxis == -1 || xAxis == $width/$cellWidth || yAxis == -1 || yAxis == $height/$cellWidth || check_collision(xAxis, yAxis, snake_array))
-		{
-			//restart game
+		// debugger
+
+		if(horizontalSnakeBody == -1 || horizontalSnakeBody == $width/$cellWidth || verticalSnakeBody == -1 || verticalSnakeBody == $height/$cellWidth || check_collision(horizontalSnakeBody, verticalSnakeBody, snake_array)) {
+		// if(horizontalSnakeBody == 0 || horizontalSnakeBody == $height || verticalSnakeBody == 0 || verticalSnakeBody == $width || check_collision(horizontalSnakeBody, verticalSnakeBody, snake_array)) {
 			init();
 			return;
 		}
-
+		// 	var newGame = prompt ("Game Over! You scored " + $score + "\n Do you want to play again?")
+		//     if (newGame === 'yes') {
+		//       init();
+		//       return;
+		//     } else {
+		//       alert ('Thank you for playing!')
+		// 			// break;
+		//     }
+		// 	return;
+		// }
 		//Lets write the code to make the snake eat the food
 		//The logic is simple
 		//If the new head position matches with that of the food,
 		//Create a new head instead of moving the tail
-		if(xAxis == $food.x && yAxis == $food.y) {
-			var tail = {x: xAxis, y: yAxis};
+		if(horizontalSnakeBody == $food.x && verticalSnakeBody == $food.y) {
+			var tail = {x: horizontalSnakeBody, y: verticalSnakeBody};
 			$score++;
 			//Create new food
 			create_food();
 		} else {
 			var tail = snake_array.pop(); //pops out the last cell
-			tail.x = xAxis; tail.y = yAxis;
+			tail.x = horizontalSnakeBody; tail.y = verticalSnakeBody;
 		}
-		//The snake can now eat the food.
-
 		snake_array.unshift(tail); //puts back the tail as the first cell
 
 		for(var i = 0; i < snake_array.length; i++) {
@@ -117,10 +122,10 @@ $(function(event) {
 
 	//Lets first create a generic function to paint cells
 	function paint_cell(x, y) {
-		$ctx.fillStyle = "blue";
+		$ctx.fillStyle = "#8BB174";
 		$ctx.fillRect(x*$cellWidth, y*$cellWidth, $cellWidth, $cellWidth);
-		$ctx.strokeStyle = "white";
-		$ctx.strokeRect(x*$cellWidth, y*$cellWidth, $cellWidth, $cellWidth);
+		// $ctx.strokeStyle = "white";
+		// $ctx.strokeRect(x*$cellWidth, y*$cellWidth, $cellWidth, $cellWidth);
 	}
 
 	function check_collision(x, y, array) {
@@ -136,7 +141,6 @@ $(function(event) {
 	//---------------Keyboard controls now
 	$(document).keydown(function(e){
 		var key = e.which;
-		//We will add another clause to prevent reverse gear
 		if(key == "37") {
 			$direction = "left";
 		} else if(key == "38") {
