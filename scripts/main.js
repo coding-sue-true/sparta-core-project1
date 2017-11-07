@@ -9,6 +9,7 @@ $(function(event) {
 	var $direction;
 	var $food;
 	var $score;
+	// var $speed;
 	var snake_array; //this will be the body of the snake
 
 
@@ -18,14 +19,17 @@ $(function(event) {
 		create_snake();
 		create_food();
 		$score = 0;
+		// $speed = 200;
 
 		//Lets move the snake now using a timer which will trigger the paint function
 		if(typeof game_loop != "undefined") {
 			clearInterval(game_loop);
 		}
-		game_loop = setInterval(paint, 200);
+		game_loop = setInterval(paint, 180);
 	}
 	init();
+
+
 
 	function create_snake() {
 		// var length = 5;
@@ -34,7 +38,6 @@ $(function(event) {
 			snake_array.push({x: Math.round(Math.random()*($width-$cellWidth)/$cellWidth), y: Math.round(Math.random()*($height-$cellWidth)/$cellWidth)});
 			//This will create a horizontal snake starting from the top left
 			// snake_array.push({x: i, y:0});
-
 		// }
 	}
 
@@ -45,7 +48,7 @@ $(function(event) {
 		};
 	}
 
-	//Lets paint the snake now
+	//------------------------Canvas and Snake Colors ----------------------
 	function paint() {
 		//To avoid the snake trail we need to paint the BG on every frame
 		//Lets paint the canvas now
