@@ -1,0 +1,62 @@
+body {
+  background-color: white;
+  margin: 0;
+  height: 2000px;
+  align-items: center;
+}
+/*--------------------- CANVAS ------------------------ */
+
+#canvas {
+  margin-top: 50px;
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  /*visibility: hidden;*/
+}
+
+/*---------------------INITIAL PAGE ------------------------ */
+
+#logo {
+  position: fixed;
+}
+
+.container {
+  background-color: white;
+  width: 700px;
+  height: 500px;
+}
+
+.firstScreen {
+  /*position: relative;*/
+}
+
+.buttonStart {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.elements {
+  visibility: hidden;
+}
+
+#instructions {
+  text-align: center;
+}
+
+li {
+  list-style: none;
+}
+
+ul {
+  padding: 0;
+}
+
+/*-------------- GAME PAGE -------------------*/
+
+/*.gamePage {
+  position: absolute;
+  height: 450px;
+  background-color: white;
+}*/
