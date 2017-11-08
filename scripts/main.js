@@ -56,7 +56,7 @@ $(function(event) {
 		var horizontalSnakeBody = snake_array[0].x;
 		var verticalSnakeBody = snake_array[0].y;
 
-		//Lets add proper direction based movement now
+		//this establishes the direction of the snake and adds that information to the array, which is the increasing snake body
 		if($direction == "right") {
 			horizontalSnakeBody++;
 		}	else if($direction == "left") {
@@ -66,27 +66,15 @@ $(function(event) {
 		} else if($direction == "down") {
 			verticalSnakeBody++;
 		}
-		//Lets add the game over clauses now
-		//This will restart the game if the snake hits the wall
-		//Lets add the code for body collision
-		//Now if the head of the snake bumps into its body, the game will restart
-		// debugger
 
-		if(horizontalSnakeBody == -1 || horizontalSnakeBody == $width/$cellWidth || verticalSnakeBody == -1 || verticalSnakeBody == $height/$cellWidth || check_collision(horizontalSnakeBody, verticalSnakeBody, snake_array)) {
-		// if(horizontalSnakeBody == 0 || horizontalSnakeBody == $height || verticalSnakeBody == 0 || verticalSnakeBody == $width || check_collision(horizontalSnakeBody, verticalSnakeBody, snake_array)) {
+    //this checks all the borders of the canvas, if the snake touches any of these values, or if it goes against itself, Game over
+    //x = 0 & 25 , y = 0 & -18
+    //this was calculated based on the total width of canvas divided by cell width, smae logic for height values
+		if(horizontalSnakeBody == 0 || horizontalSnakeBody == 25 || verticalSnakeBody == 0 || verticalSnakeBody == -18 || snakeBodyCollision(horizontalSnakeBody, verticalSnakeBody, snake_array)) {
+      alert ('Game over! You scored ' + $score + ' points! Play again?')
 			init();
 			return;
 		}
-		// 	var newGame = prompt ("Game Over! You scored " + $score + "\n Do you want to play again?")
-		//     if (newGame === 'yes') {
-		//       init();
-		//       return;
-		//     } else {
-		//       alert ('Thank you for playing!')
-		// 			// break;
-		//     }
-		// 	return;
-		// }
 		//Lets write the code to make the snake eat the food
 		//The logic is simple
 		//If the new head position matches with that of the food,
@@ -94,8 +82,9 @@ $(function(event) {
 		if(horizontalSnakeBody == $food.x && verticalSnakeBody == $food.y) {
 			var tail = {x: horizontalSnakeBody, y: verticalSnakeBody};
 			$score++;
-			//Create new food
+			//Creates new piece of food
 			create_food();
+    // }
 		} else {
 			var tail = snake_array.pop(); //pops out the last cell
 			tail.x = horizontalSnakeBody; tail.y = verticalSnakeBody;
@@ -123,7 +112,7 @@ $(function(event) {
 		// $ctx.strokeRect(x*$cellWidth, y*$cellWidth, $cellWidth, $cellWidth);
 	}
 
-	function check_collision(x, y, array) {
+	function snakeBodyCollision(x, y, array) {
 		//This function will check if the provided x/y coordinates exist
 		//in an array of cells or not
 		for(var i = 0; i < array.length; i++) {
@@ -133,7 +122,7 @@ $(function(event) {
 		return false;
 	}
 
-	//---------------Keyboard controls now
+	//---------------Keyboard controls
 	$(document).keydown(function(e){
 		var key = e.which;
 		if(key == "37") {
@@ -145,6 +134,7 @@ $(function(event) {
 		} else if(key == "40") {
 			$direction = "down";
 		}
+    //this prevents the screen to scroll up or down while playing
 		e.preventDefault();
 	})
 
