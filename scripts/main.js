@@ -4,7 +4,7 @@ $(function(event) {
 	$('.btn').on("click", startGame);
 
   function zIndex() {
-    document.getElementsByClassName("gamePage").style.zIndex = "-1";
+    document.getElementsByClassName("gamePageScreen").style.zIndex = "-1";
   }
 
 	//------ Global Variables
@@ -25,7 +25,6 @@ $(function(event) {
 		snake();
 		element();
 		$score = 0;
-
 		//game_loop is set so we can restart the game always in the same conditions, with the initial snake speed of 180ms
 		if(typeof game_loop != "undefined") {
 			clearInterval(game_loop);
@@ -72,11 +71,11 @@ $(function(event) {
     //this checks all the borders of the canvas, if the snake touches any of these values, or if it goes against itself, Game over
     //x = 0 & 25 , y = 0 & -18
     //this was calculated based on the total width of canvas divided by cell width, same logic for height values
-		// if(horizontalSnakeBody == 0 || horizontalSnakeBody == 25 || verticalSnakeBody == 0 || verticalSnakeBody == -18 || snakeBodyCollision(horizontalSnakeBody, verticalSnakeBody, snake_array)) {
-    //   alert ('Game over! You scored ' + $score + ' points! Play again?')
-		// 	startGame();
-		// 	return;
-		// }
+    if(horizontalSnakeBody == 0 || horizontalSnakeBody == 25 || verticalSnakeBody == 0 || verticalSnakeBody == -18 || snakeBodyCollision(horizontalSnakeBody, verticalSnakeBody, snake_array)) {
+      // alert ('Game over! You scored ' + $score + ' points! Play again?')
+			gameOver();
+			return;
+    }
 
 		//this is how the snake eats the element, if snakes position matches with the element position, it will be added to snakes body and a new element will be created randomly by calling the food function
 		if(horizontalSnakeBody == $foodElement.x && verticalSnakeBody == $foodElement.y) {
@@ -113,12 +112,20 @@ $(function(event) {
   //this function will be triggered at the game over if statement
 	function snakeBodyCollision(x, y, array) {
 		for(var i = 0; i < array.length; i++) {
-			if(array[i].x == x && array[i].y == y)
-			 return true;
-		}
-		return false;
-	}
+		  if(array[i].x == x && array[i].y == y){
+			  return true;
+      } else {
+        return false;
+      }
+	  }
+  }
 
+  //------ Game Over
+  function gameOver(){
+    $(".gameOverScreen").css("visibility", "visible");
+    $(".gamePageScreen").css("visibility", "hidden");
+    // document.getElementsByClassName(".gamePageScreen").style.zIndex = "-2";
+  }
 	//---------------Keyboard controls
 	$(document).keydown(function(e){
 		var key = e.which;

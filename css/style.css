@@ -56,8 +56,15 @@ ul {
 
 /*-------------- GAME PAGE -------------------*/
 
-.gamePage {
+.gamePageScreen {
   position: relative;
   height: 450px;
   /*background-color: white;*/
+}
+
+/*-------------- GAME OVER PAGE -------------------*/
+
+.gameOverScreen {
+  visibility: hidden;
+  position: relative;
 }
