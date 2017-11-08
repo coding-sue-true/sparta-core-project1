@@ -1,7 +1,7 @@
 body {
   background-color: white;
   margin: 0;
-  height: 2000px;
+  /*height: 2000px;*/
   align-items: center;
 }
 /*--------------------- CANVAS ------------------------ */
@@ -30,6 +30,7 @@ body {
 
 .firstScreen {
   position: absolute;
+  padding-left: 70px;
 }
 
 .buttonStart {
