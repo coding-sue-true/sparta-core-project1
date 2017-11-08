@@ -1,14 +1,14 @@
 $(function(event) {
   console.log("Let the game beign! DOM is ready");
 
-	$('.btn').on("click", init);
+	$('.btn').on("click", startGame);
 
 	//------ Global Variables -------------------
 	var $canvas = $("#canvas")[0];
 	var $ctx = canvas.getContext("2d"); //this is how we acces the drawing content
 	var $width = $("#canvas").width();
 	var $height = $("#canvas").height();
-	var $cellWidth = 20;
+	var $cellSize = 20;
 	var $direction;
 	var $food;
 	var $score;
@@ -16,11 +16,11 @@ $(function(event) {
 
 
 	//-----------------this is the main function that makes the game run
-	function init() {
+	function startGame() {
 		$('#canvas').css('visibility', 'visible');
 		$direction = "right";
-		create_snake();
-		create_food();
+		snake();
+		element();
 		$score = 0;
 
 		//Lets move the snake now using a timer which will trigger the paint function
@@ -32,15 +32,15 @@ $(function(event) {
 
 
   //------- Snake x&y position randomly created
-	function create_snake() {
+	function snake() {
 		snake_array = [];
-		snake_array.push({x: Math.round(Math.random()*($width-$cellWidth)/$cellWidth), y: Math.round(Math.random()*($height-$cellWidth)/$cellWidth)});
+		snake_array.push({x: Math.round(Math.random()*($width-$cellSize)/$cellSize), y: Math.round(Math.random()*($height-$cellSize)/$cellSize)});
 	}
 
   //------- Food x&y position randomly created
-	function create_food() {
+	function element() {
 		$food = {
-			x: Math.round(Math.random()*($width-$cellWidth)/$cellWidth), y: Math.round(Math.random()*($height-$cellWidth)/$cellWidth)
+			x: Math.round(Math.random()*($width-$cellSize)/$cellSize), y: Math.round(Math.random()*($height-$cellSize)/$cellSize)
     }
 	}
 
@@ -72,18 +72,15 @@ $(function(event) {
     //this was calculated based on the total width of canvas divided by cell width, smae logic for height values
 		if(horizontalSnakeBody == 0 || horizontalSnakeBody == 25 || verticalSnakeBody == 0 || verticalSnakeBody == -18 || snakeBodyCollision(horizontalSnakeBody, verticalSnakeBody, snake_array)) {
       alert ('Game over! You scored ' + $score + ' points! Play again?')
-			init();
+			startGame();
 			return;
 		}
-		//Lets write the code to make the snake eat the food
-		//The logic is simple
-		//If the new head position matches with that of the food,
-		//Create a new head instead of moving the tail
+		//this is how the snake eats the element, if snakes position matches with the element position, it will be added to snakes body and a new element will be created randomly by calling the food function
 		if(horizontalSnakeBody == $food.x && verticalSnakeBody == $food.y) {
 			var tail = {x: horizontalSnakeBody, y: verticalSnakeBody};
 			$score++;
-			//Creates new piece of food
-			create_food();
+			//Creates new element
+			element();
     // }
 		} else {
 			var tail = snake_array.pop(); //pops out the last cell
@@ -104,12 +101,10 @@ $(function(event) {
 		$ctx.fillText(score_text, 5, $height-5);
 	}
 
-	//Lets first create a generic function to paint cells
+	//color for each cell
 	function paint_cell(x, y) {
 		$ctx.fillStyle = "#8BB174";
-		$ctx.fillRect(x*$cellWidth, y*$cellWidth, $cellWidth, $cellWidth);
-		// $ctx.strokeStyle = "white";
-		// $ctx.strokeRect(x*$cellWidth, y*$cellWidth, $cellWidth, $cellWidth);
+		$ctx.fillRect(x*$cellSize, y*$cellSize, $cellSize, $cellSize);
 	}
 
 	function snakeBodyCollision(x, y, array) {
