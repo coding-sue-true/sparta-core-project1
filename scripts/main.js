@@ -4,7 +4,7 @@ $(function(event) {
 	$('.btn').on("click", startGame);
 
   function zIndex() {
-    document.getElementsByClassName("gamePageScreen").style.zIndex = "-1";
+    $('.gamePageScreen').style.zIndex = "-1";
   }
 
 	//------ Global Variables
@@ -120,11 +120,11 @@ $(function(event) {
 	  }
   }
 
-  //------ Game Over
+  //------ Game Over -------------
   function gameOver(){
     $(".gameOverScreen").css("visibility", "visible");
-    $(".gamePageScreen").css("visibility", "hidden");
-    // document.getElementsByClassName(".gamePageScreen").style.zIndex = "-2";
+    $(".gamePageScreen").css("display", "none");
+    $(".gameOverScreen").find( "h3" ).html("<h3> Your Score is " + $score + " ! </h3>");
   }
 	//---------------Keyboard controls
 	$(document).keydown(function(e){
