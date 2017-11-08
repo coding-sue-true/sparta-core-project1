@@ -19,17 +19,21 @@
       <img src="images/logo.png" alt="snakeLogo" id="logo">
     </nav>
     <div class="container">
-      <div id="instructions">
-        <img src="images/snake.png" alt="snake">
-        <ul>
-          <li><h1>Rules</h1></li>
-          <li>Use your keyboard keys to move the snake: right, up, left, down.</li>
-          <li>If you go against the walls or the snake itself, you die!</li>
-          <li>Score as much as you can by eating elements</li>
-        </ul>
-      </div>
-      <div class="buttonStart">
-        <a href="#canvas"><button type="button" class="btn btn-warning">Start Game!</button></a>
+      <div class="firstScreen">
+        <div id="instructions">
+          <img src="images/snake.png" alt="snake">
+          <ul>
+            <li><h1>Rules</h1></li>
+            <li>Use your keyboard keys to move the snake: right, up, left, down.</li>
+            <li>If you go against the walls or the snake itself, you die!</li>
+            <li>Score as much as you can by eating elements</li>
+          </ul>
+        </div>
+        <div class="buttonStart">
+          <a href="#canvas">
+          <button type="button" class="btn btn-warning">Start Game!</button>
+          </a>
+        </div>
       </div>
       <div class="gamePage">
         <canvas id="canvas" width="500" height="360"></canvas>

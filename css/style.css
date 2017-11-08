@@ -13,10 +13,10 @@ body {
   margin-left: auto;
   margin-right: auto;
   display: block;
-  visibility: hidden;
+  /*visibility: hidden;*/
 }
 
-/*---------------------INITIAL GAME PAGE ------------------------ */
+/*---------------------INITIAL PAGE ------------------------ */
 
 #logo {
   position: fixed;
@@ -26,6 +26,10 @@ body {
   background-color: white;
   width: 700px;
   height: 500px;
+}
+
+.firstScreen {
+  /*position: relative;*/
 }
 
 .buttonStart {
@@ -48,3 +52,11 @@ li {
 ul {
   padding: 0;
 }
+
+/*-------------- GAME PAGE -------------------*/
+
+/*.gamePage {
+  position: absolute;
+  height: 450px;
+  background-color: white;
+}*/

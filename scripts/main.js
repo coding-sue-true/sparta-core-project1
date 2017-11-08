@@ -3,6 +3,10 @@ $(function(event) {
   //this is the event listener to trigger the 'start game' button on the initial screen
 	$('.btn').on("click", startGame);
 
+  // function zIndex() {
+  //   document.getElementsByClassName("gamePage").style.zIndex = "1";
+  // }
+
 	//------ Global Variables
 	var $canvas = $("#canvas")[0];
 	var $ctx = canvas.getContext("2d"); //this is how we acces the drawing content
@@ -16,7 +20,7 @@ $(function(event) {
 
 	//this is the main function that makes the game run
 	function startGame() {
-		$('#canvas').css('visibility', 'visible');
+		// $('#canvas').css('visibility', 'visible');
 		$direction = "right";
 		snake();
 		element();
@@ -67,7 +71,7 @@ $(function(event) {
 
     //this checks all the borders of the canvas, if the snake touches any of these values, or if it goes against itself, Game over
     //x = 0 & 25 , y = 0 & -18
-    //this was calculated based on the total width of canvas divided by cell width, smae logic for height values
+    //this was calculated based on the total width of canvas divided by cell width, same logic for height values
 		if(horizontalSnakeBody == 0 || horizontalSnakeBody == 25 || verticalSnakeBody == 0 || verticalSnakeBody == -18 || snakeBodyCollision(horizontalSnakeBody, verticalSnakeBody, snake_array)) {
       alert ('Game over! You scored ' + $score + ' points! Play again?')
 			startGame();
@@ -114,7 +118,7 @@ $(function(event) {
 		}
 		return false;
 	}
-  
+
 	//---------------Keyboard controls
 	$(document).keydown(function(e){
 		var key = e.which;
