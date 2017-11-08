@@ -1,21 +1,20 @@
 $(function(event) {
   console.log("Let the game beign! DOM is ready");
-
+  //this is the event listener to trigger the 'start game' button on the initial screen
 	$('.btn').on("click", startGame);
 
-	//------ Global Variables -------------------
+	//------ Global Variables
 	var $canvas = $("#canvas")[0];
 	var $ctx = canvas.getContext("2d"); //this is how we acces the drawing content
 	var $width = $("#canvas").width();
 	var $height = $("#canvas").height();
 	var $cellSize = 20;
 	var $direction;
-	var $food;
+	var $foodElement;
 	var $score;
 	var snake_array; //this will be the body of the snake
 
-
-	//-----------------this is the main function that makes the game run
+	//this is the main function that makes the game run
 	function startGame() {
 		$('#canvas').css('visibility', 'visible');
 		$direction = "right";
@@ -23,13 +22,12 @@ $(function(event) {
 		element();
 		$score = 0;
 
-		//Lets move the snake now using a timer which will trigger the paint function
+		//game_loop is set so we can restart the game always in the same conditions, with the initial snake speed of 180ms
 		if(typeof game_loop != "undefined") {
 			clearInterval(game_loop);
 		}
     game_loop = setInterval(paint, 180);
 	}
-
 
   //------- Snake x&y position randomly created
 	function snake() {
@@ -39,7 +37,7 @@ $(function(event) {
 
   //------- Food x&y position randomly created
 	function element() {
-		$food = {
+		$foodElement = {
 			x: Math.round(Math.random()*($width-$cellSize)/$cellSize), y: Math.round(Math.random()*($height-$cellSize)/$cellSize)
     }
 	}
@@ -75,28 +73,28 @@ $(function(event) {
 			startGame();
 			return;
 		}
+
 		//this is how the snake eats the element, if snakes position matches with the element position, it will be added to snakes body and a new element will be created randomly by calling the food function
-		if(horizontalSnakeBody == $food.x && verticalSnakeBody == $food.y) {
+		if(horizontalSnakeBody == $foodElement.x && verticalSnakeBody == $foodElement.y) {
 			var tail = {x: horizontalSnakeBody, y: verticalSnakeBody};
 			$score++;
 			//Creates new element
 			element();
-    // }
 		} else {
 			var tail = snake_array.pop(); //pops out the last cell
 			tail.x = horizontalSnakeBody; tail.y = verticalSnakeBody;
 		}
 		snake_array.unshift(tail); //puts back the tail as the first cell
 
+    //this is how the body is increased everytime it eats an element
 		for(var i = 0; i < snake_array.length; i++) {
 			var cellUnit = snake_array[i];
-			//Lets paint 10px wide cells
 			paint_cell(cellUnit.x, cellUnit.y);
 		}
+		//paint the food element
+		paint_cell($foodElement.x, $foodElement.y);
 
-		//Lets paint the food
-		paint_cell($food.x, $food.y);
-		//Lets paint the score
+		//score box
 		var score_text = "Score: " + $score;
 		$ctx.fillText(score_text, 5, $height-5);
 	}
@@ -107,16 +105,16 @@ $(function(event) {
 		$ctx.fillRect(x*$cellSize, y*$cellSize, $cellSize, $cellSize);
 	}
 
+  //this is how the snake dies if it goes against itself, it looks for the current x,y values in the snake_array
+  //this function will be triggered at the game over if statement
 	function snakeBodyCollision(x, y, array) {
-		//This function will check if the provided x/y coordinates exist
-		//in an array of cells or not
 		for(var i = 0; i < array.length; i++) {
 			if(array[i].x == x && array[i].y == y)
 			 return true;
 		}
 		return false;
 	}
-
+  
 	//---------------Keyboard controls
 	$(document).keydown(function(e){
 		var key = e.which;
@@ -132,11 +130,4 @@ $(function(event) {
     //this prevents the screen to scroll up or down while playing
 		e.preventDefault();
 	})
-
-
-
-
-
-
-
 })
