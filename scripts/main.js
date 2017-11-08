@@ -21,6 +21,8 @@ $(function(event) {
 	//this is the main function that makes the game run
 	function startGame() {
 		$('.firstScreen').css('visibility', 'hidden');
+    $('.gameOverScreen').css('visibility', 'hidden');
+    $(".gamePageScreen").show();
 		$direction = "right";
 		snake();
 		element();
@@ -123,9 +125,11 @@ $(function(event) {
   //------ Game Over -------------
   function gameOver(){
     $(".gameOverScreen").css("visibility", "visible");
-    $(".gamePageScreen").css("display", "none");
+    $(".gamePageScreen").hide();
     $(".gameOverScreen").find( "h3" ).html("<h3> Your Score is " + $score + " ! </h3>");
+	  $('.btn').on("click", startGame);
   }
+
 	//---------------Keyboard controls
 	$(document).keydown(function(e){
 		var key = e.which;
