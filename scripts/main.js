@@ -69,7 +69,7 @@ $(function(event) {
     //this checks all the borders of the canvas, if the snake touches any of these values, or if it goes against itself, Game over
     //x = 0 & 25 , y = 0 & -18
     //this was calculated based on the total width of canvas divided by cell width, same logic for height values
-    if(horizontalSnakeBody == 0 || horizontalSnakeBody == 25 || verticalSnakeBody == 0 || verticalSnakeBody == -18 || snakeBodyCollision(horizontalSnakeBody, verticalSnakeBody, snake_array)) {
+    if(horizontalSnakeBody == -1 || horizontalSnakeBody == 25 || verticalSnakeBody == -1 || verticalSnakeBody == 18 || snakeBodyCollision(horizontalSnakeBody, verticalSnakeBody, snake_array)) {
       // alert ('Game over! You scored ' + $score + ' points! Play again?')
 			gameOver();
 			return;
