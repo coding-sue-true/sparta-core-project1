@@ -29,7 +29,7 @@ body {
 }
 
 .firstScreen {
-  /*position: relative;*/
+  position: absolute;
 }
 
 .buttonStart {
@@ -55,8 +55,8 @@ ul {
 
 /*-------------- GAME PAGE -------------------*/
 
-/*.gamePage {
-  position: absolute;
+.gamePage {
+  position: relative;
   height: 450px;
-  background-color: white;
-}*/
+  /*background-color: white;*/
+}
