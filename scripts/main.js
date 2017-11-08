@@ -3,10 +3,6 @@ $(function(event) {
   //this is the event listener to trigger the 'start game' button on the initial screen
 	$('.btn').on("click", startGame);
 
-  function zIndex() {
-    $('.gamePageScreen').style.zIndex = "-1";
-  }
-
 	//------ Global Variables
 	var $canvas = $("#canvas")[0];
 	var $ctx = canvas.getContext("2d"); //this is how we acces the drawing content

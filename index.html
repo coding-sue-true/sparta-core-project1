@@ -18,7 +18,9 @@
     <nav class="navbar">
       <img src="images/logo.png" alt="snakeLogo" id="logo">
     </nav>
+    <!-- This is the main container where all code is -->
     <div class="container">
+      <!-- This is the first screen we see on the page with instructions and start game options -->
       <div class="firstScreen">
         <div id="instructions">
           <img src="images/snake.png" alt="snake">
@@ -33,9 +35,11 @@
           <button type="button" class="btn btn-warning">Start Game!</button>
         </div>
       </div>
+      <!-- This is the page where the game is displayed, score can be seen on this page -->
       <div class="gamePageScreen">
         <canvas id="canvas" width="500" height="360"></canvas>
       </div>
+      <!-- This is the game over page, score is displayed, user can restart the game -->
       <div class="gameOverScreen">
         <img src="images/gameover.gif" alt="gameover.gif">
         <h1>GAME OVER</h1>
@@ -45,6 +49,7 @@
           <button type="button" class="btn btn-warning">Restart Game!</button>
         </div>
       </div>
+      <!-- This elements are the food snake will be eating -->
       <div class="elements">
         <!-- elements snake will eat
         free code camp -->
