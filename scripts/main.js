@@ -2,6 +2,7 @@ $(function(event) {
   console.log("Let the game beign! DOM is ready");
 
 	$('.btn').on("click", init);
+
 	//------ Global Variables -------------------
 	var $canvas = $("#canvas")[0];
 	var $ctx = canvas.getContext("2d"); //this is how we acces the drawing content
@@ -11,7 +12,6 @@ $(function(event) {
 	var $direction;
 	var $food;
 	var $score;
-	// var $speed;
 	var snake_array; //this will be the body of the snake
 
 
@@ -27,34 +27,29 @@ $(function(event) {
 		if(typeof game_loop != "undefined") {
 			clearInterval(game_loop);
 		}
-		game_loop = setInterval(paint, 180);
+    game_loop = setInterval(paint, 180);
 	}
 
 
-
+  //------- Snake x&y position randomly created
 	function create_snake() {
-		// var length = 5;
 		snake_array = [];
-		// for(var i = length; i>=0; i--) {
-			snake_array.push({x: Math.round(Math.random()*($width-$cellWidth)/$cellWidth), y: Math.round(Math.random()*($height-$cellWidth)/$cellWidth)});
-			//This will create a horizontal snake starting from the top left
-			// snake_array.push({x: i, y:0});
-		// }
+		snake_array.push({x: Math.round(Math.random()*($width-$cellWidth)/$cellWidth), y: Math.round(Math.random()*($height-$cellWidth)/$cellWidth)});
 	}
 
+  //------- Food x&y position randomly created
 	function create_food() {
 		$food = {
-			x: Math.round(Math.random()*($width-$cellWidth)/$cellWidth), //This will create a cell with x/y between 0-44
-			y: Math.round(Math.random()*($height-$cellWidth)/$cellWidth), //Because there are 45(450/10) positions accross the rows and columns
-		};
+			x: Math.round(Math.random()*($width-$cellWidth)/$cellWidth), y: Math.round(Math.random()*($height-$cellWidth)/$cellWidth)
+    }
 	}
 
 	//------------------------Canvas and Snake Colors ----------------------
 	function paint() {
 		//CANVAS
-		$ctx.fillStyle = "white";
+		$ctx.fillStyle = "white"; // inside part of canvas
 		$ctx.fillRect(0, 0, $width, $height);
-		$ctx.strokeStyle = "black";
+		$ctx.strokeStyle = "black"; // canvas outline
 		$ctx.strokeRect(0, 0, $width, $height);
 
 		//This adds a cell to the snake_array

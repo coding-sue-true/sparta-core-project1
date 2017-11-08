@@ -1,17 +1,12 @@
 body {
   background-color: white;
   margin: 0;
-  /*display: flex;*/
-  /* This centers our sketch horizontally. */
-  justify-content: center;
-  /* This centers our sketch vertically. */
+  height: 2000px;
   align-items: center;
 }
-
 /*--------------------- CANVAS ------------------------ */
 
 #canvas {
-  /*background-color: black;*/
   margin-top: 50px;
   padding-left: 0;
   padding-right: 0;
@@ -19,19 +14,18 @@ body {
   margin-right: auto;
   display: block;
   visibility: hidden;
-  /*width: 500px;*/
 }
 
 /*---------------------INITIAL GAME PAGE ------------------------ */
 
+#logo {
+  position: fixed;
+}
+
 .container {
-  border: 1px solid black;
   background-color: white;
   width: 700px;
   height: 500px;
-  /*margin-top: 70px;*/
-  /*margin-left: auto;*/
-  /*margin-right: auto;*/
 }
 
 .buttonStart {
