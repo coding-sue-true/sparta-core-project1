@@ -15,9 +15,20 @@
     <title>Snake Game</title>
   </head>
   <body>
+    <!-- Background music -->
+    <audio controls autoplay loop>
+      <source src="audio/backgroundsound.mp3" type="audio/mp3">
+    </audio>
+    <!-- Snake Logo -->
     <nav class="navbar">
       <img src="images/logo.png" alt="snakeLogo" id="logo">
     </nav>
+    <!-- Score Screen only shown when playing -->
+    <div class="scoreScreen">
+      <h3>Score</h3>
+      <p> </p>
+      <img src="images/animatedsnake.gif" alt="animatedsnake" id="animatedSnake">
+    </div>
     <!-- This is the main container where all code is -->
     <div class="container">
       <!-- This is the first screen we see on the page with instructions and start game options -->
