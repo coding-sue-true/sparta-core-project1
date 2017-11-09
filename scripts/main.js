@@ -16,6 +16,20 @@
   	var $score = 0;
   	var snake_array; //this will be the body of the snake
     var speed;
+    var backgroundMusic = new Audio('audio/backgroundsound.mp3');
+
+    backgroundMusic.play();
+
+    $('#musicPlayer').on('click', function() {
+      if (backgroundMusic.paused === false) {
+        backgroundMusic.pause();
+        console.log('it is paused');
+      } else {
+        backgroundMusic.play();
+        console.log('it is playing again');
+      }
+    });
+
 
   	//this is the main function that makes the game run
   	function startGame() {
@@ -65,7 +79,8 @@
     //------- Food x&y position randomly created
   	function element() {
   		$foodElement = {
-  			x: Math.round(Math.random()*($width-$cellSize)/$cellSize), y: Math.round(Math.random()*($height-$cellSize)/$cellSize)
+  			x: Math.round(Math.random()*($width-$cellSize)/$cellSize),
+        y: Math.round(Math.random()*($height-$cellSize)/$cellSize)
       }
   	}
 
