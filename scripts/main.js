@@ -13,6 +13,7 @@ $(function(event) {
 	var $foodElement;
 	var $score;
 	var snake_array; //this will be the body of the snake
+  var speed;
 
 	//this is the main function that makes the game run
 	function startGame() {
@@ -22,13 +23,31 @@ $(function(event) {
 		$direction = "right";
 		snake();
 		element();
+    gameInterval();
 		$score = 0;
-		//game_loop is set so we can restart the game always in the same conditions, with the initial snake speed of 180ms
-		if(typeof game_loop != "undefined") {
-			clearInterval(game_loop);
-		}
-    game_loop = setInterval(paint, 180);
-	}
+    speed = 180;
+  }
+
+  function gameInterval() {
+    if(typeof game_loop != "undefined") {
+      clearInterval(game_loop);
+    }
+    game_loop = setInterval(paint, speed);
+  }
+    // checkScore();
+    //game_loop is set so we can restart the game always in the same conditions, with the initial snake speed of 180ms
+
+
+  // increase of speed
+  function checkScore() {
+    if ($score === 3) {
+      speed = 130;
+    } else if ($score === 5) {
+      speed = 100;
+    } else if ($score === 7) {
+      speed = 75;
+    }
+  }
 
   //------- Snake x&y position randomly created
 	function snake() {
@@ -45,6 +64,8 @@ $(function(event) {
 
 	//------------------------Canvas and Snake Colors ----------------------
 	function paint() {
+    checkScore();
+    gameInterval();
 		//CANVAS
 		$ctx.fillStyle = "white"; // inside part of canvas
 		$ctx.fillRect(0, 0, $width, $height);
@@ -70,7 +91,6 @@ $(function(event) {
     //x = 0 & 25 , y = 0 & -18
     //this was calculated based on the total width of canvas divided by cell width, same logic for height values
     if(horizontalSnakeBody == -1 || horizontalSnakeBody == 25 || verticalSnakeBody == -1 || verticalSnakeBody == 18 || snakeBodyCollision(horizontalSnakeBody, verticalSnakeBody, snake_array)) {
-      // alert ('Game over! You scored ' + $score + ' points! Play again?')
 			gameOver();
 			return;
     }
@@ -98,6 +118,7 @@ $(function(event) {
 		//score box
 		var score_text = "Score: " + $score;
 		$ctx.fillText(score_text, 5, $height-5);
+
 	}
 
 	//color for each cell
@@ -122,7 +143,7 @@ $(function(event) {
   function gameOver(){
     $(".gameOverScreen").css("visibility", "visible");
     $(".gamePageScreen").hide();
-    $(".gameOverScreen").find( "h3" ).html("<h3> Your Score is " + $score + " ! </h3>");
+    $(".gameOverScreen").find( "h3" ).html("<h3> You scored " + $score + " points! </h3>");
 	  $('.btn').on("click", startGame);
   }
 
