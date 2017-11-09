@@ -4,7 +4,6 @@ body {
   align-items: center;
 }
 /*--------------------- CANVAS ------------------------ */
-
 #canvas {
   margin-top: 50px;
   padding-left: 0;
@@ -15,7 +14,6 @@ body {
 }
 
 /*---------------------INITIAL PAGE ------------------------ */
-
 #logo {
   position: fixed;
 }
@@ -86,14 +84,12 @@ ul {
 }
 
 /*-------------- GAME PAGE -------------------*/
-
 .gamePageScreen {
   position: relative;
   height: 450px;
 }
 
 /*-------------- GAME OVER PAGE -------------------*/
-
 .gameOverScreen {
   visibility: hidden;
   display: block;

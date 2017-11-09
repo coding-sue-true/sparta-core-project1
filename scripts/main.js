@@ -1,5 +1,4 @@
 $(function(event) {
-  console.log("Let the game beign! DOM is ready");
   //this is the event listener to trigger the 'start game' button on the initial screen
   $('.btn').on("click", startGame);
 
@@ -12,7 +11,7 @@ $(function(event) {
 	var $direction;
 	var $foodElement;
 	var $score = 0;
-	var snake_array; //this will be the body of the snake
+	var snakeBody; //this will be the body of the snake
   var speed;
   var backgroundMusic = new Audio('audio/backgroundsound.mp3');
 
@@ -48,7 +47,7 @@ $(function(event) {
     if(typeof game_loop != "undefined") {
       clearInterval(game_loop);
     }
-    game_loop = setInterval(paint, speed);
+    game_loop = setInterval(game, speed);
   }
 
   // increase of speed
@@ -78,8 +77,9 @@ $(function(event) {
 
   //------- Snake x&y position randomly created
 	function snake() {
-		snake_array = [];
-		snake_array.push({x: Math.round(Math.random()*($width-$cellSize)/$cellSize), y: Math.round(Math.random()*($height-$cellSize)/$cellSize)});
+		snakeBody = [];
+		snakeBody.push({x: Math.round(Math.random()*($width-$cellSize)/$cellSize),
+      y: Math.round(Math.random()*($height-$cellSize)/$cellSize)});
 	}
 
   //------- Food x&y position randomly created
@@ -90,8 +90,8 @@ $(function(event) {
     }
 	}
 
-	//------------------------Canvas and Snake Colors ----------------------
-	function paint() {
+	//-------Main game function -----
+	function game() {
     checkScore();
     gameInterval();
 		//CANVAS
@@ -100,9 +100,9 @@ $(function(event) {
 		$ctx.strokeStyle = 'black'; // canvas outline
 		$ctx.strokeRect(0, 0, $width, $height);
 
-		//This adds a cell to the snake_array
-		var horizontalSnakeBody = snake_array[0].x;
-		var verticalSnakeBody = snake_array[0].y;
+		//This adds a cell to the snakeBody
+		var horizontalSnakeBody = snakeBody[0].x;
+		var verticalSnakeBody = snakeBody[0].y;
 
 		//this establishes the direction of the snake and adds that information to the array, which is the increasing snake body
 		if($direction == "right") {
@@ -115,10 +115,8 @@ $(function(event) {
 			verticalSnakeBody++;
 		}
 
-    //this checks all the borders of the canvas, if the snake touches any of these values, or if it goes against itself, Game over
-    //x = 0 & 25 , y = 0 & -18
-    //this was calculated based on the total width of canvas divided by cell width, same logic for height values
-    if(horizontalSnakeBody == -1 || horizontalSnakeBody == $width/$cellSize || verticalSnakeBody == -1 || verticalSnakeBody == $height/$cellSize || snakeBodyCollision(horizontalSnakeBody, verticalSnakeBody, snake_array)) {
+    //this checks all the borders of the canvas, if the snake touches any of these values, it dies
+    if(horizontalSnakeBody == -1 || horizontalSnakeBody == $width/$cellSize || verticalSnakeBody == -1 || verticalSnakeBody == $height/$cellSize) {
 			gameOver();
 			return;
     }
@@ -130,14 +128,14 @@ $(function(event) {
 			//Creates new element
 			element();
 		} else {
-			var tail = snake_array.pop(); //removes the last cell unit
+			var tail = snakeBody.pop(); //removes the last cell unit
 			tail.x = horizontalSnakeBody; tail.y = verticalSnakeBody;
 		}
-		snake_array.unshift(tail); //puts back the tail as the first cell
+		snakeBody.unshift(tail); //puts back the tail as the first cell
 
     //this is how the body is increased everytime it eats an element
-		for(var i = 0; i < snake_array.length; i++) {
-			var cellUnit = snake_array[i];
+		for(var i = 0; i < snakeBody.length; i++) {
+			var cellUnit = snakeBody[i];
 			paint_cell(cellUnit.x, cellUnit.y);
 		}
 		//paint the food element
@@ -152,18 +150,6 @@ $(function(event) {
 		$ctx.fillStyle = "#8BB174";
 		$ctx.fillRect(x*$cellSize, y*$cellSize, $cellSize, $cellSize);
 	}
-
-  //this is how the snake dies if it goes against itself, it looks for the current x,y values in the snake_array
-  //this function will be triggered at the game over if statement
-	function snakeBodyCollision(x, y, array) {
-		for(var i = 0; i < array.length; i++) {
-		  if(array[i].x == x && array[i].y == y){
-			  return true;
-      } else {
-        return false;
-      }
-	  }
-  }
 
   //------ Game Over -------------
   function gameOver(){
