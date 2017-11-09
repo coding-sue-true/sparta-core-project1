@@ -64,6 +64,15 @@ audio {
   visibility: hidden;
 }
 
+#musicPlayer {
+  margin-left: 393px;
+  line-height: inherit;
+  border-radius: 0;
+  position: fixed;
+  margin-top: 9px;
+  border-style: none;
+}
+
 #instructions {
   text-align: center;
 }

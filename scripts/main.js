@@ -19,6 +19,7 @@
     var backgroundMusic = new Audio('audio/backgroundsound.mp3');
 
     backgroundMusic.play();
+    backgroundMusic.loop = true;
 
     $('#musicPlayer').on('click', function() {
       if (backgroundMusic.paused === false) {
