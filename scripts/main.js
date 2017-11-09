@@ -21,6 +21,7 @@
     backgroundMusic.play();
     backgroundMusic.loop = true;
 
+    //music player on and off
     $('#musicPlayer').on('click', function() {
       if (backgroundMusic.paused === false) {
         backgroundMusic.pause();
@@ -30,7 +31,6 @@
         console.log('it is playing again');
       }
     });
-
 
   	//this is the main function that makes the game run
   	function startGame() {
@@ -46,7 +46,7 @@
       speed = 180;
     }
 
-    //how often my pain function runs
+    //how often my play function runs
     function gameInterval() {
       if(typeof game_loop != "undefined") {
         clearInterval(game_loop);
@@ -68,6 +68,12 @@
         speed = 65;
       } else if ($score === 20) {
         speed = 50;
+      } else if ($score === 23) {
+        speed = 40;
+      } else if ($score === 28) {
+        speed = 20;
+      } else if ($score === 35) {
+        speed = 10;
       }
     }
 
@@ -113,7 +119,7 @@
       //this checks all the borders of the canvas, if the snake touches any of these values, or if it goes against itself, Game over
       //x = 0 & 25 , y = 0 & -18
       //this was calculated based on the total width of canvas divided by cell width, same logic for height values
-      if(horizontalSnakeBody == -1 || horizontalSnakeBody == 25 || verticalSnakeBody == -1 || verticalSnakeBody == 18 || snakeBodyCollision(horizontalSnakeBody, verticalSnakeBody, snake_array)) {
+      if(horizontalSnakeBody == -1 || horizontalSnakeBody == $width/$cellSize || verticalSnakeBody == -1 || verticalSnakeBody == $height/$cellSize || snakeBodyCollision(horizontalSnakeBody, verticalSnakeBody, snake_array)) {
   			gameOver();
   			return;
       }
