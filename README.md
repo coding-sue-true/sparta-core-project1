@@ -67,7 +67,7 @@ You will be working **individually** for this project! So show us what you've go
 
 ## Planning
 
-We strongly advise that you take the time to plan your project well. You should include all planning, wireframes, skatches etc in your presentation.
+We strongly advise that you take the time to plan your project well. You should include all planning, wireframes, sketches etc in your presentation.
 
 #### Project Plan deliverables:
 
