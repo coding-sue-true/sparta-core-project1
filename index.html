@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="icon" href="images/favicon.ico">
     <!--  BOOTSTRAP  -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
@@ -15,53 +16,51 @@
     <title>Snake Game</title>
   </head>
   <body>
+    <!-- Snake Logo -->
     <nav class="navbar">
       <img src="images/logo.png" alt="snakeLogo" id="logo">
     </nav>
+    <!-- Background music -->
+    <button id="musicPlayer">
+      <i class="fa fa-music fa-lg" aria-hidden="true"></i>
+    </button>
+    <!-- Score Screen only shown when playing -->
+    <div class="scoreScreen">
+      <h3>Score</h3>
+      <p> </p>
+      <img src="images/animatedsnake.gif" alt="animatedsnake" id="animatedSnake">
+    </div>
+    <!-- This is the main container where all code is -->
     <div class="container">
+      <!-- This is the first screen we see on the page with instructions and start game options -->
       <div class="firstScreen">
         <div id="instructions">
           <img src="images/snake.png" alt="snake">
           <ul>
             <li><h1>Rules</h1></li>
             <li>Use your keyboard keys to move the snake: right, up, left, down.</li>
-            <li>If you go against the walls or the snake itself, you die!</li>
+            <li>If you go against the walls, you die!</li>
             <li>Score as much as you can by eating elements</li>
+            <li>Speed will be increasing as you score. Can you get to 30 points?!</li>
           </ul>
         </div>
         <div class="buttonStart">
-          <a href="#canvas">
           <button type="button" class="btn btn-warning">Start Game!</button>
-          </a>
         </div>
       </div>
-      <div class="gamePage">
+      <!-- This is the page where the game is displayed, score can be seen on this page -->
+      <div class="gamePageScreen">
         <canvas id="canvas" width="500" height="360"></canvas>
       </div>
-      <div class="elements">
-        <!-- elements snake will eat
-        free code camp -->
-        <i class="fa fa-free-code-camp" aria-hidden="true"></i>
-        <!-- menu bars -->
-        <i class="fa fa-bars" aria-hidden="true"></i>
-        <!-- code -->
-        <i class="fa fa-code" aria-hidden="true"></i>
-        <!-- code fork -->
-        <i class="fa fa-code-fork" aria-hidden="true"></i>
-        <!-- database -->
-        <i class="fa fa-database" aria-hidden="true"></i>
-        <!-- code file -->
-        <i class="fa fa-file-code-o" aria-hidden="true"></i>
-        <!-- laptop -->
-        <i class="fa fa-laptop" aria-hidden="true"></i>
-        <!-- dolar - jquery -->
-        <i class="fa fa-usd" aria-hidden="true"></i>
-        <!-- apple -->
-        <i class="fa fa-apple" aria-hidden="true"></i>
-        <!-- codepen -->
-        <i class="fa fa-codepen" aria-hidden="true"></i>
-        <!-- github -->
-        <i class="fa fa-github" aria-hidden="true"></i>
+      <!-- This is the game over page, score is displayed, user can restart the game -->
+      <div class="gameOverScreen">
+        <img src="images/gameover.gif" alt="gameover.gif">
+        <h1>GAME OVER</h1>
+        <br>
+        <h3>Your Score is </h3>
+        <div class="buttonRestartGame">
+          <button type="button" class="btn btn-warning">Restart Game!</button>
+        </div>
       </div>
     </div>
   </body>
